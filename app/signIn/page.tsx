@@ -8,41 +8,34 @@ import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import Link from 'next/link';
 
-const SignUpPage = () => {
+const SignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
 
-
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleSignIn = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      setError("Passwords don't match");
-      return;
-    }
     setError('');
-    // Handle sign-up logic here
-    console.log('Sign up with:', email, password);
+    // Handle sign-in logic here
+    console.log('Sign in with:', email, password);
   };
 
-  const handleGoogleSignUp = () => {
-    // Handle Google sign-up logic here
-    console.log('Sign up with Google');
+  const handleGoogleSignIn = () => {
+    // Handle Google sign-in logic here
+    console.log('Sign in with Google');
   };
-
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Create an account</CardTitle>
+          <CardTitle className="text-2xl font-bold text-center">Sign in to your account</CardTitle>
           <CardDescription className="text-center">
-            Enter your details below to create your account
+            Enter your details below to sign in
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <form onSubmit={handleSignUp} className="space-y-4">
+          <form onSubmit={handleSignIn} className="space-y-4">
             <div className="space-y-2">
               <Label htmlFor="email">Email</Label>
               <Input
@@ -64,23 +57,13 @@ const SignUpPage = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Confirm Password</Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                required
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </div>
             {error && (
               <Alert variant="destructive">
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            <Button type="submit" className="w-full">Sign Up</Button>
+            <Button type="submit" className="w-full">Sign In</Button>
           </form>
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
@@ -96,7 +79,7 @@ const SignUpPage = () => {
             variant="outline"
             type="button"
             className="w-full"
-            onClick={handleGoogleSignUp}
+            onClick={handleGoogleSignIn}
           >
             <svg viewBox="0 0 24 24" className="mr-2 h-4 w-4" focusable="false">
               <path
@@ -122,9 +105,12 @@ const SignUpPage = () => {
         </CardContent>
         <CardFooter>
           <p className="text-center text-sm text-gray-600 mt-2 w-full">
-            Already have an account?{' '}
-            <Link className="font-medium text-blue-600 hover:text-blue-500 p-0" href={'/signIn'}>
-              Sign in
+            Don&apos;t have an account?{' '}
+            <Link
+              className="font-medium text-blue-600 hover:text-blue-500 p-0"
+              href={'/signUp'}
+            >
+              Sign up
             </Link>
           </p>
         </CardFooter>
@@ -133,4 +119,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignInPage;

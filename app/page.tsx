@@ -40,7 +40,7 @@ const LandingPage: React.FC = () => {
               <a href="#features" className="text-gray-600 hover:text-teal-600 transition duration-300">Features</a>
               <a href="#pricing" className="text-gray-600 hover:text-teal-600 transition duration-300">Pricing</a>
               <a href="#contact" className="text-gray-600 hover:text-teal-600 transition duration-300">Contact</a>
-              <Link href={'/signUp'} className="bg-teal-600 text-white px-4 py-2 rounded-full hover:bg-teal-700 transition duration-300 transform hover:scale-105">
+              <Link href={'/signIn'} className="bg-teal-600 text-white px-4 py-2 rounded-xl hover:bg-teal-700 transition duration-300 transform hover:scale-105">
                 Login
               </Link>
             </div>
@@ -56,9 +56,9 @@ const LandingPage: React.FC = () => {
           <p className="text-xl sm:text-2xl text-teal-100 mb-10 max-w-2xl mx-auto animate-fade-in-up">
             Boost productivity and collaborate seamlessly with our intuitive Kanban-based task management solution.
           </p>
-          <button className="bg-white text-teal-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-teal-100 transition duration-300 transform hover:scale-105 shadow-lg">
+          <Link href={'/signUp'} className="bg-white text-teal-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-teal-100 transition duration-300 transform hover:scale-105 shadow-lg">
             Get Started Free
-          </button>
+          </Link>
           <div className="mt-16 animate-bounce">
             <a href="#features" className="text-white hover:text-teal-200 transition duration-300">
               <ChevronDown className="h-10 w-10 mx-auto" />
