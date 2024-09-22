@@ -15,15 +15,34 @@ const SignUpPage = () => {
   const [error, setError] = useState('');
 
 
-  const handleSignUp = (e: React.FormEvent) => {
+  const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (password !== confirmPassword) {
       setError("Passwords don't match");
       return;
     }
     setError('');
-    // Handle sign-up logic here
-    console.log('Sign up with:', email, password);
+    
+    try {
+      const response = await fetch('/api/auth/signUp/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Sign up successful:', data);
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Sign up failed');
+      }
+    } catch (error) {
+      console.error('Sign up error:', error);
+      setError('An unexpected error occurred');
+    }
   };
 
   const handleGoogleSignUp = () => {

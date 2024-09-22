@@ -23,6 +23,11 @@ if (!global.mongoose) {
 
 async function dbConnect(): Promise<mongoose.Connection> {
   if (global.mongoose.conn) {
+    if (global.mongoose.conn.db) {
+      console.log(`Already connected to database: ${global.mongoose.conn.db.databaseName}`);
+    } else {
+      console.log('Already connected to database, but database name is not available.');
+    }
     return global.mongoose.conn;
   }
 
@@ -32,6 +37,11 @@ async function dbConnect(): Promise<mongoose.Connection> {
     };
 
     global.mongoose.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
+      if (mongoose.connection.db) {
+        console.log(`Connected to database: ${mongoose.connection.db.databaseName}`);
+      } else {
+        console.log('Connected to database, but database name is not available.');
+      }
       return mongoose.connection;
     });
   }
@@ -40,6 +50,7 @@ async function dbConnect(): Promise<mongoose.Connection> {
     global.mongoose.conn = await global.mongoose.promise;
   } catch (e) {
     global.mongoose.promise = null;
+    console.error('Error connecting to database:', e);
     throw e;
   }
 
