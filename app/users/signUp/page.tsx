@@ -7,12 +7,16 @@ import { Label } from '@/components/ui/label';
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import Link from 'next/link';
+import { Bounce, ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
 
 const SignUpPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
 
 
   const handleSignUp = async (e: React.FormEvent) => {
@@ -34,12 +38,23 @@ const SignUpPage = () => {
 
       if (response.ok) {
         const data = await response.json();
+
         console.log('Sign up successful:', data);
+        toast.success('Sign up successful! Login to continue..', {
+          onClose: () => router.push('/signIn')
+        });
       } else {
         const errorData = await response.json();
-        setError(errorData.message || 'Sign up failed');
+        const errorMessage = errorData.message || 'Sign up failed';
+        setError(errorMessage);
+        toast.error(errorMessage, {
+          onClose: () => router.push('/signUp')
+        });
       }
     } catch (error) {
+      toast.error('An unexpected error occurred! Please try again later', {
+        onClose: () => router.push('/signUp')
+      });
       console.error('Sign up error:', error);
       setError('An unexpected error occurred');
     }
@@ -148,6 +163,20 @@ const SignUpPage = () => {
           </p>
         </CardFooter>
       </Card>
+
+      <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          transition={Bounce}
+      />
     </div>
   );
 };

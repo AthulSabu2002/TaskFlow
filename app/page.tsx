@@ -40,7 +40,7 @@ const LandingPage: React.FC = () => {
               <a href="#features" className="text-gray-600 hover:text-teal-600 transition duration-300">Features</a>
               <a href="#pricing" className="text-gray-600 hover:text-teal-600 transition duration-300">Pricing</a>
               <a href="#contact" className="text-gray-600 hover:text-teal-600 transition duration-300">Contact</a>
-              <Link href={'/signIn'} className="bg-teal-600 text-white px-4 py-2 rounded-xl hover:bg-teal-700 transition duration-300 transform hover:scale-105">
+              <Link href={'/users/signIn'} className="bg-teal-600 text-white px-4 py-2 rounded-xl hover:bg-teal-700 transition duration-300 transform hover:scale-105">
                 Login
               </Link>
             </div>

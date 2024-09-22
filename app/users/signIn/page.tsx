@@ -7,17 +7,42 @@ import { Label } from '@/components/ui/label';
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import Link from 'next/link';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useRouter } from 'next/navigation';
 
 const SignInPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const router = useRouter();
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    // Handle sign-in logic here
-    console.log('Sign in with:', email, password);
+    try {
+      const response = await fetch('/api/auth/signIn/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Sign In successful:', data);
+        toast.success('Sign In successful', {
+          onClose: () => router.push('/users/user-dashboard')
+        });
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Sign up failed');
+      }
+    } catch (error) {
+      console.error('Sign In error:', error);
+      setError('An unexpected error occurred');
+    }
   };
 
   const handleGoogleSignIn = () => {
@@ -108,13 +133,14 @@ const SignInPage = () => {
             Don&apos;t have an account?{' '}
             <Link
               className="font-medium text-blue-600 hover:text-blue-500 p-0"
-              href={'/signUp'}
+              href={'/users/signUp'}
             >
               Sign up
             </Link>
           </p>
         </CardFooter>
       </Card>
+      <ToastContainer />
     </div>
   );
 };
