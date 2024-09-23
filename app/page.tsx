@@ -56,7 +56,7 @@ const LandingPage: React.FC = () => {
           <p className="text-xl sm:text-2xl text-teal-100 mb-10 max-w-2xl mx-auto animate-fade-in-up">
             Boost productivity and collaborate seamlessly with our intuitive Kanban-based task management solution.
           </p>
-          <Link href={'/signUp'} className="bg-white text-teal-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-teal-100 transition duration-300 transform hover:scale-105 shadow-lg">
+          <Link href={'/users/signUp'} className="bg-white text-teal-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-teal-100 transition duration-300 transform hover:scale-105 shadow-lg">
             Get Started Free
           </Link>
           <div className="mt-16 animate-bounce">

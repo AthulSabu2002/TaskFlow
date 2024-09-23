@@ -140,7 +140,7 @@ const SignInPage = () => {
           </p>
         </CardFooter>
       </Card>
-      <ToastContainer />
+      <ToastContainer autoClose={1000}/>
     </div>
   );
 };

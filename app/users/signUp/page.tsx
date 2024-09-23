@@ -53,7 +53,7 @@ const SignUpPage = () => {
       }
     } catch (error) {
       toast.error('An unexpected error occurred! Please try again later', {
-        onClose: () => router.push('/signUp')
+        onClose: () => router.push('/users/signUp')
       });
       console.error('Sign up error:', error);
       setError('An unexpected error occurred');
